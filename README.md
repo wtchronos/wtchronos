@@ -1,76 +1,47 @@
 <h3 align="center">Warren Command</h3>
-<p align="center">Autonomous AI infrastructure built by one person.</p>
+<p align="center">A personal autonomous operating system — 6 integrated systems running 24/7 on a single VPS, coordinated by AI.</p>
 
 <p align="center">
   <a href="https://warrencommand.dev"><img src="https://img.shields.io/badge/warrencommand.dev-0a1220?style=for-the-badge&logoColor=white" alt="Website" /></a>
-  <a href="https://dashboard.warrencommand.dev"><img src="https://img.shields.io/badge/Live_Dashboard-1a3a5c?style=for-the-badge&logoColor=white" alt="Dashboard" /></a>
+  <a href="https://ops.warrencommand.dev"><img src="https://img.shields.io/badge/Ops_Dashboard-1a3a5c?style=for-the-badge&logoColor=white" alt="Ops Dashboard" /></a>
 </p>
 
 ---
 
 ### What this is
 
-A unified system — not a collection of repos — where autonomous agents, governance rules, monitoring, and a control plane all talk to each other. Every component exists because it solves a real problem in running AI infrastructure solo.
+Not a collection of repos — a unified system where an autonomous agent, a governance layer, a control plane, a monitoring stack, a prompt OS, and a cross-session memory layer all talk to each other. Every component exists because it solves a real problem in running AI infrastructure solo.
 
 The goal: **an always-on intelligence layer that maintains, monitors, and improves itself** while I focus on building the next thing.
 
 ---
 
-### System architecture
+### The system
 
-```mermaid
-graph TD
-    NOUS["NOUS — Control Plane"]
-    NOUS --> KAIROS["Kairos — Autonomous Agent"]
-    NOUS --> ANVIL["Anvil — Governance Layer"]
-    NOUS --> NC["Nerve Center — Monitoring"]
-    NOUS --> WCM["WCM — Cross-Model Memory"]
-
-    KAIROS --> TG["Telegram Interface"]
-    KAIROS --> OR["OpenRouter (Haiku / Sonnet / Opus)"]
-    KAIROS --> GW["Gateway — sandboxed execution"]
-
-    ANVIL --> TRUST["Trust Ledger"]
-    ANVIL --> OVERNIGHT["Overnight Build Pipeline"]
-    ANVIL --> PATTERNS["Pattern-to-Skill Engine"]
-
-    NC --> DASH["dashboard.warrencommand.dev"]
-    NC --> SSE["Real-time SSE Events"]
-
-    WCM --> NEON["Neon Postgres + pgvector"]
-    WCM --> MCP["MCP Retrieval Server"]
-
-    style NOUS fill:#0d1b2a,stroke:#4a9eff,color:#c0d6f0
-    style KAIROS fill:#0d1b2a,stroke:#4a9eff,color:#c0d6f0
-    style ANVIL fill:#0d1b2a,stroke:#4a9eff,color:#c0d6f0
-    style NC fill:#0d1b2a,stroke:#4a9eff,color:#c0d6f0
-    style WCM fill:#0d1b2a,stroke:#4a9eff,color:#c0d6f0
-```
+| System | What it does | Repo |
+|--------|-------------|------|
+| **Cortix** | Unified autonomous OS kernel — control plane, service coordination, progressive trust tiers | [`cortix`](https://github.com/wtchronos/cortix) |
+| **Kairos** | Always-on AI agent — Telegram interface, 9 mixins, hash-chained audit trail, 3-tier LLM routing | [`kairos-w`](https://github.com/wtchronos/kairos-w) |
+| **ANVIL** | Multi-agent governance — trust ledger, trigger engine, overnight build pipeline | [`anvil`](https://github.com/wtchronos/anvil) |
+| **Prompt Foundry** | Local-first Prompt OS — version control for prompts, 7 MCP tools, template engine | [`prompt-foundry`](https://github.com/wtchronos/prompt-foundry) |
+| **Nerve Center** | Real-time intelligence dashboard — health monitoring, SSE events, alerting | [`nerve-center`](https://github.com/wtchronos/nerve-center) |
+| **WCM** | Warren Command Memory — Neon/pgvector, cross-session intelligence, proactive suggestions | [`wcm-server`](https://github.com/wtchronos/wcm-server) |
 
 ---
 
-### Components
+### How it works
 
-| System | What it does | Key details |
-|--------|-------------|-------------|
-| **[NOUS](https://github.com/wtchronos/nous)** | Unified control plane — the kernel that orchestrates everything else | [FastAPI](https://fastapi.tiangolo.com/) on port 8100, progressive trust tiers (T1–T4), single escalation channel |
-| **[Kairos](https://github.com/wtchronos/kairos-w)** | Always-on autonomous agent, controlled via [Telegram](https://core.telegram.org/bots/api) | Hash-chained audit trail, 3-tier [OpenRouter](https://openrouter.ai/) LLM routing, 9 [systemd](https://systemd.io/) services, [bubblewrap](https://github.com/containers/bubblewrap) sandboxing |
-| **[Anvil](https://github.com/wtchronos/anvil)** | Multi-agent governance — rules, trust, and overnight automation | Shared context bus, trust ledger, overnight pipeline with adaptive learning, pattern-to-skill extraction |
-| **[Nerve Center](https://github.com/wtchronos/nerve-center)** | Live monitoring dashboard and active system health monitor | Pure Python [stdlib](https://docs.python.org/3/library/) (zero deps), 51 tests, SSE real-time events, [dashboard.warrencommand.dev](https://dashboard.warrencommand.dev) |
-| **[Dashboard](https://github.com/wtchronos/cross-agent-website-dashboard)** | Web frontend — system health visualization, skill map, spend tracking | [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/) + [tRPC](https://trpc.io/) + [Tailwind CSS](https://tailwindcss.com/) |
-| **[Codex Hardening](https://github.com/wtchronos/codex-personal-hardening)** | CI/CD gates, verification policies, cross-agent bridge protocol | Security layer — autonomous skill generation, deployment verification |
+**Cortix** is the kernel — it orchestrates every other system through a single control plane on the VPS. Trust tiers (T1-T4) gate what actions are allowed autonomously vs. what requires approval.
 
----
+**Kairos** runs 24/7 on a DigitalOcean VPS. It polls Telegram for commands, runs scheduled health checks, and surfaces insights proactively. All actions go through a gateway pipeline with approval gates for anything above low risk. Nine systemd services keep it alive.
 
-### How it works in practice
+**ANVIL** enforces the rules. Every action gets a risk level. The overnight pipeline runs autonomous build loops while I sleep — with trust constraints that prevent anything destructive.
 
-**1. Kairos runs 24/7 on a [DigitalOcean](https://www.digitalocean.com/) VPS.** It polls Telegram for commands, runs scheduled health checks and ambient scans, and surfaces insights proactively. All actions go through a 7-step gateway pipeline with approval gates for anything above low risk.
+**Prompt Foundry** is the prompt engineering layer. Version-controlled prompts, a template engine, and MCP tools that any agent in the system can call.
 
-**2. Anvil enforces the rules.** Every action gets a risk level. Medium and high risk actions require explicit approval via Telegram. The overnight pipeline runs autonomous build loops while I sleep — with trust constraints that prevent it from doing anything destructive.
+**Nerve Center** watches everything. Service uptime, cost tracking, pattern detection. Alerts go to Telegram when something degrades. The live dashboard shows current state.
 
-**3. Nerve Center watches everything.** System health, service uptime, cost tracking, pattern detection. Alerts go to Telegram when something degrades. The [live dashboard](https://dashboard.warrencommand.dev) shows the current state.
-
-**4. NOUS ties it together.** One control plane that shares state across all systems via [Neon Postgres + pgvector](https://neon.tech/). Cross-model memory means context survives across sessions, models, and tools.
+**WCM** gives the whole system memory. Neon Postgres with pgvector means context survives across sessions, models, and tools. Cross-model memory is what makes the system coherent over time.
 
 ---
 
@@ -89,13 +60,19 @@ graph TD
 
 | Layer | Technologies |
 |-------|-------------|
-| **Backend** | Python 3.12 ([asyncio](https://docs.python.org/3/library/asyncio.html), [FastAPI](https://fastapi.tiangolo.com/), [Pydantic v2](https://docs.pydantic.dev/)), [httpx](https://www.python-httpx.org/) |
-| **Frontend** | TypeScript, [React](https://react.dev/), [Vite](https://vitejs.dev/), [tRPC](https://trpc.io/), [Tailwind CSS](https://tailwindcss.com/), SSE |
-| **Infrastructure** | [DigitalOcean](https://www.digitalocean.com/) VPS, [systemd](https://systemd.io/) (10+ services), [Caddy](https://caddyserver.com/) reverse proxy |
-| **Data** | [Neon Postgres](https://neon.tech/) + [pgvector](https://github.com/pgvector/pgvector), SQLite, JSONL audit chains |
-| **AI/LLM** | [OpenRouter](https://openrouter.ai/) (Haiku/Sonnet/Opus routing), [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (34+ custom skills) |
-| **Automation** | [Hammerspoon](https://www.hammerspoon.org/) (Mac), [Telegram Bot API](https://core.telegram.org/bots/api), cron, systemd timers |
-| **Security** | [bubblewrap](https://github.com/containers/bubblewrap) sandboxing, HMAC lease management, hash-chained audit logs |
+| **Backend** | Python 3.12 (asyncio, FastAPI, Pydantic v2), httpx |
+| **Frontend** | TypeScript, React, Vite, tRPC, Tailwind CSS, SSE |
+| **Infrastructure** | DigitalOcean VPS, systemd (12 services), Caddy reverse proxy |
+| **Data** | Neon Postgres + pgvector, SQLite, JSONL audit chains |
+| **AI/LLM** | OpenRouter (Haiku/Sonnet/Opus routing), Claude Code (38+ custom skills) |
+| **Automation** | Hammerspoon (Mac), Telegram Bot API, cron, systemd timers |
+| **Security** | bubblewrap sandboxing, HMAC lease management, hash-chained audit logs |
+
+---
+
+### Pinned repos
+
+> [`prompt-foundry`](https://github.com/wtchronos/prompt-foundry) / [`kairos-w`](https://github.com/wtchronos/kairos-w) / [`cortix`](https://github.com/wtchronos/cortix) / [`anvil`](https://github.com/wtchronos/anvil) / [`nerve-center`](https://github.com/wtchronos/nerve-center) / [`warren-ai-walkthrough`](https://github.com/wtchronos/warren-ai-walkthrough)
 
 ---
 
@@ -103,14 +80,15 @@ graph TD
 
 | Metric | Value |
 |--------|-------|
-| Build sessions | 288+ |
-| Avg deliverables per session | 16.5 |
-| Systemd services running | 10+ |
-| Custom Claude Code skills | 34+ |
-| Repos | 9 |
+| Build sessions | 306+ |
+| Systemd services running | 12 |
+| Custom Claude Code skills | 38+ |
+| VPS uptime target | 24/7/365 |
 | Team size | 1 |
 
 ---
+
+<p align="center">Built by one person. Runs 24/7.</p>
 
 <p align="center">
   <a href="https://warrencommand.dev">warrencommand.dev</a>
